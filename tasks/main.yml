@@ -45,7 +45,7 @@
 - debug:
     msg: "{{ create_subnet.results }}"
 
-- name: Get subnet ids
+#- name: Get subnet ids
 
 - name: Create igw {{ ec2_name_prefix }}-igw
   ec2_vpc_igw:
