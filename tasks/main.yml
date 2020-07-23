@@ -27,7 +27,7 @@
   until: create_sg is not failed
   retries: 5
 
-- name: Create subnet {{ ec2_name_prefix }}-subnet
+- name: Create subnets for {{ ec2_name_prefix }}
   ec2_vpc_subnet:
     region: "{{ ec2_region }}"
     az: "{{ item.az }}"
@@ -37,13 +37,13 @@
     map_public: yes
     resource_tags: "{{ item.resource_tags }}"
   with_items: "{{ vpc_subnets }}"
-  register: create_subnet
+  register: create_subnets
   when: ec2_vpc_id is undefined
-  until: create_subnet is not failed
+  until: create_subnets is not failed
   retries: 15
 
 - debug:
-    msg: "{{ create_subnet.results }}"
+    msg: "{{ create_subnets.results }}"
 
 - name: Get subnet ids
   set_fact:
@@ -69,8 +69,7 @@
   ec2_vpc_route_table:
     region: "{{ ec2_region }}"
     vpc_id: "{{ create_vpc.vpc.id }}"
-    subnets:
-      - "{{ create_subnet.subnet.id }}"
+    subnets: "{{ subnet_ids }}"
     routes:
       - dest: 0.0.0.0/0
         gateway_id: "{{ create_igw.gateway_id }}"
