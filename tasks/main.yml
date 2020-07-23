@@ -36,7 +36,7 @@
     wait_timeout: 600
     map_public: yes
     resource_tags: "{{ item.resource_tags }}"
-  with_items:
+  with_items: "{{ vpc_subnets }}"
   register: create_subnet
   when: ec2_vpc_id is undefined
   until: create_subnet is not failed
