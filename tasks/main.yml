@@ -43,7 +43,9 @@
   retries: 15
 
 - debug:
-    msg: "{{ create_subnet }}"
+    msg: "{{ create_subnet.results }}"
+
+- name: Get subnet ids
 
 - name: Create igw {{ ec2_name_prefix }}-igw
   ec2_vpc_igw:
@@ -68,7 +70,6 @@
         gateway_id: "{{ create_igw.gateway_id }}"
     tags:
       Name: "{{ ec2_name_prefix }}-rtb"
-      Demonstration: "{{ ec2_name_prefix }}"
   register: create_rtb
   until: create_rtb is not failed
   retries: 5
