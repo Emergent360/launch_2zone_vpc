@@ -27,7 +27,7 @@
   until: create_sg is not failed
   retries: 5
 
-- name: Create subnets for {{ ec2_name_prefix }}
+- name: Create subnets for {{ ec2_name_prefix }}-vpc
   ec2_vpc_subnet:
     region: "{{ ec2_region }}"
     az: "{{ item.az }}"
