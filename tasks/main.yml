@@ -30,14 +30,13 @@
 - name: Create subnet {{ ec2_name_prefix }}-subnet
   ec2_vpc_subnet:
     region: "{{ ec2_region }}"
-    az: "{{ ec2_az }}"
+    az: "{{ item.az }}"
     vpc_id: "{{ create_vpc.vpc.id }}"
-    cidr: "{{ ec2_subnet }}"
+    cidr: "{{ item.cidr }}"
     wait_timeout: 600
     map_public: yes
-    resource_tags:
-      Name: "{{ ec2_name_prefix }}-subnet"
-      Demonstration: "{{ ec2_name_prefix }}"
+    resource_tags: "{{ item.resource_tags }}"
+  with_items:
   register: create_subnet
   when: ec2_vpc_id is undefined
   until: create_subnet is not failed

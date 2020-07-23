@@ -1,6 +1,6 @@
 ---
 # defaults file for launch_2zone_vpc
-ec2_name_prefix: Test
+ec2_name_prefix: Foo
 ec2_subnet: "172.16.0.0/16"
 ec2_region: us-east-1
 ec2_wait: true
