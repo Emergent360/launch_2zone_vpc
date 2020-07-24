@@ -99,5 +99,5 @@
       - "ec2 vpc subnet ids: {{ subnet_ids }}"
       - "ec2 igw id: {{ create_igw.gateway_id }}"
       - "ec2 rtb id: {{ create_rtb.route_table.route_table_id }}"
-      - "ec2 key name: {{ create_key.key.name }}"
+#      - "ec2 key name: {{ create_key.key.name }}"
  
