@@ -35,7 +35,7 @@
     cidr: "{{ item.cidr }}"
     wait_timeout: 600
     map_public: yes
-    resource_tags: "{{ item.resource_tags }}"
+    tags: "{{ item.tags }}"
   with_items: "{{ vpc_subnets }}"
   register: create_subnets
   when: ec2_vpc_id is undefined
