@@ -23,5 +23,5 @@ vpc_subnets:
     az: "{{ ec2_az_2 }}"
     tags: 
       Name: "{{ ec2_name_prefix }}-{{ ec2_az_2 }}-cluster_subnet_2"
-      Alias: Cluster_Subnet_2"
+      Alias: Cluster_Subnet_2
       
