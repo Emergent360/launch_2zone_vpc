@@ -60,7 +60,6 @@
   register: create_igw
   until: create_igw is not failed
   retries: 15
-  when: ec2_vpc_id is undefined
 
 - name: Create rtb {{ ec2_name_prefix }}-rtb
   ec2_vpc_route_table:
@@ -75,7 +74,6 @@
   register: create_rtb
   until: create_rtb is not failed
   retries: 5
-  when: ec2_vpc_id is undefined
 
 - name: Show VPC components created
   debug:
