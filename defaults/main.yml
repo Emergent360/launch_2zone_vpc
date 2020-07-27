@@ -15,10 +15,13 @@ vpc_subnets:
   - index: 1
     cidr: "{{ ec2_cidr_1 }}"
     az: "{{ ec2_az_1 }}"
-    resource_tags: { "Name":"{{ ec2_name_prefix }}-{{ ec2_az_1 }}-ec2_subnet-1", "Alias":"Subnet_1" }
-    alias: "Subnet_1"
+    tags: 
+      Name: "{{ ec2_name_prefix }}-{{ ec2_az_1 }}-cluster_subnet_1"
+      Alias: Cluster_Subnet_1
   - index: 2
     cidr: "{{ ec2_cidr_2 }}"
     az: "{{ ec2_az_2 }}"
-    resource_tags: { "Name":"{{ ec2_name_prefix }}-{{ ec2_az_2 }}-ec2-subnet-2", "Alias":"Subnet_2" }
-    alias: "Subnet_2"
+    tags: 
+      Name: "{{ ec2_name_prefix }}-{{ ec2_az_2 }}-cluster_subnet_2"
+      Alias: Cluster_Subnet_2"
+      
