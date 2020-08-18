@@ -10,7 +10,7 @@
   retries: 5
 
 - name: Set security group rules template
-- set_fact:
+  set_fact:
     from_template: "{{ lookup('template', 'vpc_rules.j2') }}"
 
 - name: Create security group {{ ec2_name_prefix }}-sg
