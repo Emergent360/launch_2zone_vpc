@@ -9,6 +9,7 @@
   until: create_vpc is not failed
   retries: 5
 
+- name: Set security group rules template
 - set_fact:
     from_template: "{{ lookup('template', 'vpc_rules.j2') }}"
 
@@ -27,7 +28,7 @@
   until: create_sg is not failed
   retries: 5
 
-- name: Create subnets for {{ ec2_name_prefix }}-vpc
+- name: Create subnet for {{ ec2_name_prefix }}-vpc
   ec2_vpc_subnet:
     region: "{{ ec2_region }}"
     az: "{{ item.az }}"
@@ -37,14 +38,14 @@
     map_public: yes
     tags: "{{ item.tags }}"
   with_items: "{{ vpc_subnets }}"
-  register: create_subnets
+  register: create_subnet
   when: ec2_vpc_id is undefined
-  until: create_subnets is not failed
+  until: create_subnet is not failed
   retries: 15
 
 - name: Get subnet ids
   set_fact:
-    subnet_ids: "{{ create_subnets.results
+    subnet_ids: "{{ create_subnet.results
       | selectattr('subnet.id', 'defined')
       | map(attribute='subnet.id')
       | list
